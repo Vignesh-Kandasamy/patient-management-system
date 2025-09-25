@@ -1,11 +1,12 @@
 package com.project.Medical.Entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.Length;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,34 +15,42 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 
 @Entity
-@Table
+@Table(name ="patient_info")
 public class Patient 
 {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int PatientId;
+	private int patientId;
 	
-	@NotNull(message = "Name may not be null")
-	@NotEmpty(message = "Name may not be empty")
+	@NotBlank(message = "FirstName cannot be null or empty or blank!")
+	@Column(name="first_name")
 	private String firstName;
 	
+	@Length(min=2, max=6, message="Lastname should be Min 2 and Max 6 characters!")
+	@Column(name="last_name")
 	private String lastName;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	private Date dob;
+	@NotNull(message="Date of birth is required")
+	@Past(message="Date of Birth must to be in past")
+	@Column(name="date_of_birth")
+	private LocalDate  dob;
 	
+	@NotEmpty(message = "Gender is Mandatory!")
+	@Column(name="gender")
 	private String gender;
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="fk_clinical_id")
 	private Clinical clinical;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="fk_patient_id")
+	@OneToMany(mappedBy="patient",cascade=CascadeType.ALL)
+	//@JoinColumn(name="fk_patient_id", referencedColumnName="patientId")
 	private List<Address> address;
 	
 	@OneToMany(cascade=CascadeType.ALL)
@@ -62,11 +71,11 @@ public class Patient
 	}
 	
 	public int getPatientId() {
-		return PatientId;
+		return patientId;
 	}
 
 	public void setPatientId(int patientId) {
-		PatientId = patientId;
+		this.patientId = patientId;
 	}
 
 	public String getFirstName() {
@@ -85,11 +94,11 @@ public class Patient
 		this.lastName = lastName;
 	}
 
-	public Date getDob() {
+	public LocalDate getDob() {
 		return dob;
 	}
 
-	public void setDob(Date dob) {
+	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
 

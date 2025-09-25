@@ -1,23 +1,25 @@
 package com.project.Medical.Entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Min;
 
 @Entity
-@Table
+@Table(name="prescription_info")
 public class Prescriptions 
 {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int prescriptionId;
 	
+	@Column(name="drug_name")
 	private String drugName;
 	
 	//@Min(value=1)
+	@Column(name="rx_number")
 	private long rxNumber;
 	
 	public Prescriptions()

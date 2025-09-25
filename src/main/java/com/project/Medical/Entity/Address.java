@@ -1,30 +1,43 @@
 package com.project.Medical.Entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table
+@Table(name="address_info")
 public class Address 
 {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int addressId;
 	
+	@Column(name="address_type")
 	private String addressType;
 	
+	@Column(name="address_line1")
 	private String addressLine1;
 	
+	@Column(name="address_line2")
 	private String addressLine2;
 	
+	@Column(name="city")
 	private String city;
 	
+	@Column(name="zipcode")
 	private long zipcode;
 	
+	@Column(name="statecode")
 	private long statecode;
+	
+	@ManyToOne
+	@JoinColumn(name="fk_patient_id", referencedColumnName="patientId")
+	private Patient patient;
 	
 	public int getAddressId() {
 		return addressId;
@@ -81,7 +94,5 @@ public class Address
 	public void setStatecode(long statecode) {
 		this.statecode = statecode;
 	}
-	
-	
 	
 }

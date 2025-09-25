@@ -5,12 +5,14 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.project.Medical.Controller.PatientErrorResponse;
+import ch.qos.logback.classic.Logger;
 
 @RestControllerAdvice
 public class PatientRestExceptionHandler 
@@ -37,8 +39,17 @@ public class PatientRestExceptionHandler
 		return errorMap;
 	}
 	
-	@ExceptionHandler
-	public ResponseEntity<PatientErrorResponse> handleOtherException(Exception e)
+	
+//	@ResponseStatus(HttpStatus.BAD_REQUEST)
+//	@ExceptionHandler(HttpMessageNotReadableException.class)
+//	public ResponseEntity<Object> handleDateFormatException(HttpMessageNotReadableException e)
+//	{
+//		return new ResponseEntity<>("Please provide valid date format!!", HttpStatus.BAD_REQUEST);
+//		
+//	}
+	
+	/*@ExceptionHandler
+	public ResponseEntity<PatientErrorResponse> handleGlobalException(Exception e)
 	{
 		PatientErrorResponse error =new PatientErrorResponse();
 		error.setStatusCode(HttpStatus.BAD_REQUEST.value());
@@ -46,5 +57,5 @@ public class PatientRestExceptionHandler
 		error.setTimeStamp(System.currentTimeMillis());
 		
 		return new ResponseEntity<PatientErrorResponse>(error,HttpStatus.BAD_REQUEST);
-	}
+	}*/
 }

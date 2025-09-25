@@ -1,4 +1,4 @@
-package com.project.Medical.Controller;
+package com.project.Medical.Exception;
 
 public class PatientErrorResponse 
 {

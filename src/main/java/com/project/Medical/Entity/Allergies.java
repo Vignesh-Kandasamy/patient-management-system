@@ -57,5 +57,4 @@ public class Allergies
 		this.severity = severity;
 	}
 	
-	
 }*/

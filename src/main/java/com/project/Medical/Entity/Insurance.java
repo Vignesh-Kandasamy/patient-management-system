@@ -1,5 +1,6 @@
 package com.project.Medical.Entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,18 +8,21 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table
+@Table(name="insurance_info")
 public class Insurance 
 {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int insuranceId;
 	
+	@Column(name="insurance_first_name")
 	private String policyHolderFirstName;
 	
+	@Column(name="insurance_last_name")
 	private String policyHolderLastName;
 	
-	private long policyAmount;
+	@Column(name="policy_amount")
+	private long policyAmount; 
 	
 	public Insurance()
 	{
