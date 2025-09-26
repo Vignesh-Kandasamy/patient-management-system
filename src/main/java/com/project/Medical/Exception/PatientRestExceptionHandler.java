@@ -40,22 +40,22 @@ public class PatientRestExceptionHandler
 	}
 	
 	
-//	@ResponseStatus(HttpStatus.BAD_REQUEST)
-//	@ExceptionHandler(HttpMessageNotReadableException.class)
-//	public ResponseEntity<Object> handleDateFormatException(HttpMessageNotReadableException e)
-//	{
-//		return new ResponseEntity<>("Please provide valid date format!!", HttpStatus.BAD_REQUEST);
-//		
-//	}
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(HttpMessageNotReadableException.class)
+	public ResponseEntity<Object> handleDateFormatException(HttpMessageNotReadableException e)
+	{
+		return new ResponseEntity<>("Please provide valid date format!!", HttpStatus.BAD_REQUEST);
+		
+	}
 	
-	/*@ExceptionHandler
+	@ExceptionHandler
 	public ResponseEntity<PatientErrorResponse> handleGlobalException(Exception e)
 	{
 		PatientErrorResponse error =new PatientErrorResponse();
 		error.setStatusCode(HttpStatus.BAD_REQUEST.value());
-		error.setDescription("The Patient Id should be only Numeric!!!!");
+		error.setDescription("Handled by global exception!!");
 		error.setTimeStamp(System.currentTimeMillis());
 		
 		return new ResponseEntity<PatientErrorResponse>(error,HttpStatus.BAD_REQUEST);
-	}*/
+	}
 }
